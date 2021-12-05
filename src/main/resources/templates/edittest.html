@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Spring Security Example </title>
+    </head>
+    <body>
+        
+        <h1>Edit test</h1>
+        <form th:action="@{/createtest}" method="post">
+            <input type="hidden"  name="id" th:value = "${test.id}"/>
+            <div><label> Name : <input type="text" name="name" th:value="${test.name}"/> </label></div>
+            <div><label> Description : <input type="text" name="description" 
+                                              th:value="${test.description}"/> </label></div>
+            <div><label> Duration : <input type="number" name="duration" th:value="${test.duration}" 
+                                           min="5" max="120"/> </label></div>
+            <div><label> Level : <select name="level" size="1">
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select> </label></div>
+            <div><label> Subject :  <select name="subjectId">
+
+                        <option th:each="subject : ${subjects}" 
+                                th:value="${subject.id}"
+                                th:text="${subject.name}">${subject.name}</option>
+                    </select>
+                </label></div>
+
+            <div><input type="submit" value="ОK"/></div>
+        </form>
+        <form action="/tests">
+            <input type="submit" value="Close" />
+        </form>
+    </body>
+</html>

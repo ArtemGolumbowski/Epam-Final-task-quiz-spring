@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Spring Security Example </title>
+    </head>
+    <body>
+        
+        <h1>Edit test</h1>
+        <form th:action="@{/editquestion}" method="post">
+            <input type="hidden"  name="id" th:value = "${question.id}"/>
+            <input type="hidden"  name="testId" th:value = "${question.test.id}"/>
+            <div><label> Description : <input type="text" name="description" 
+                                              th:value="${question.description}"/> </label></div>
+                     
+            <div><input type="submit" value="ОK"/></div>
+        </form>
+        <form th:action="@{'/questions/' + ${question.test.id}}">
+            <input type="submit" value="Close" />
+        </form>
+    </body>
+</html>

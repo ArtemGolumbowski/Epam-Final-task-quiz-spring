@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>TODO supply a title</title>
+
+    </head>
+    <body>
+        <div><table>
+                <tr>
+                    <th>DESCRIPTION</th>
+                    <th>ACTIONS</th>
+                </tr>
+                <tr th:each="question : ${questions}">
+                    <td><a th:href="@{'/answers/' + ${question.id}}" th:text="${question.description}"></a></td>
+
+                    <td><form th:action="@{/editquestion}" method="GET">
+                            <input type="hidden"  name="questionId" th:value = "${question.id}"/>
+                            <input type="submit" value="Edit" />
+                        </form>
+
+                        <form th:action="@{/deletequestion}" method="GET">
+                            <input type="hidden"  name="questionId" th:value = "${question.id}"/>
+                            <input type="submit" value="Delete" />
+                        </form>
+                    </td>
+                </tr>
+            </table></div>
+        <a th:href="@{'/createquestion/'+${testId}}">Create question</a>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </body>
+</html>
+
