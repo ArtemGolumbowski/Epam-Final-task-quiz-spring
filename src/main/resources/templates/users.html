@@ -4,7 +4,7 @@
    
     <body>
         <div th:fragment="content">
-        <div class="container" th:fragment="content">
+        <div class="container" >
             <div class="card">
             <table>
                 <tr>
@@ -15,27 +15,27 @@
                     <th>DURATION</th>
                     <th>ACTIONS</th>
                 </tr>
-                <tr th:each="test : ${tests}">
-                    <td><a th:href="@{'/questions/' + ${test.id}}" th:text="${test.name}"></a></td>
-                    <td th:text="${test.description}">апр</td>
-                    <td th:text="${test.subject.description}">апр</td>
-                    <td th:text="${test.level}">ар</td>
-                    <td th:text="${test.duration}">пр</td>
-                    <td><form th:action="@{/edittest}" method="GET">
-                            <input type="hidden"  name="testId" th:value = "${test.id}"/>
+                <tr th:each="user : ${users}">
+                    <td><a th:text="${user.username}"></a></td>
+                    <td th:text="${user.name}">апр</td>
+                    <td th:text="${user.surname}">апр</td>
+                    <td th:text="${user.enabled}">ар</td>
+                   
+                    <td><form th:action="@{/edituser}" method="GET">
+                            <input type="hidden"  name="userId" th:value = "${user.id}"/>
                             <input type="submit" value="Edit" />
                         </form>
 
-                    <form th:action="@{/deletetest}" method="GET">
-                            <input type="hidden"  name="testId" th:value = "${test.id}"/>
+                    <form th:action="@{/deleteuser}" method="GET">
+                            <input type="hidden"  name="userId" th:value = "${user.id}"/>
                             <input type="submit" value="Delete" />
                         </form>
                     </td>
                 </tr>
             </table>
                 <ul class="nav nav-pills">
-                    <li class="nav-item" th:each="i: ${#numbers.sequence(0, tests.totalPages-1)}">
-                        <a th:href="@{/tests/(page=${i})}"th:text="${i}" class="nav-link"></a>
+                    <li class="nav-item" th:each="i: ${#numbers.sequence(0, users.totalPages-1)}">
+                        <a th:href="@{/users/(page=${i})}"th:text="${i}" class="nav-link"></a>
                     </li>
                 </ul>
             </div>

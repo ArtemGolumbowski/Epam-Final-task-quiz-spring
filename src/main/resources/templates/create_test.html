@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>Spring Security Example </title>
-    </head>
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" th:include="pageLayout :: page">
+   
     <body>
+        <div th:fragment="content" class="container">
         <div th:if="${param.error}">
             Invalid username and password.
         </div>
@@ -13,10 +12,10 @@
         </div>
         <h1>Create test</h1>
         <form th:action="@{/createtest}" method="post">
-            <div><label> Name : <input type="text" name="name"/> </label></div>
-            <div><label> Description : <input type="text" name="description"/> </label></div>
-            <div><label> Duration : <input type="number" name="duration" value="5" min="5" max="120"/> </label></div>
-            <div><label> Level : <select name="level" size="1">
+            <div class="form-group row"><label> Name : <input type="text" name="name"/> </label></div>
+            <div class="form-group row"> Description : <input type="text" name="description"/> </label></div>
+            <div class="form-group row"><label> Duration : <input type="number" name="duration" value="5" min="5" max="120"/> </label></div>
+            <div class="form-group row"><label> Level : <select name="level" size="1">
                         <option value="easy">Easy</option>
                         <option value="medium">Medium</option>
                         <option value="hard">Hard</option>
@@ -30,6 +29,8 @@
                 </label></div>
 
             <div><input type="submit" value="ОK"/></div>
+            
         </form>
+        </div>
     </body>
 </html>

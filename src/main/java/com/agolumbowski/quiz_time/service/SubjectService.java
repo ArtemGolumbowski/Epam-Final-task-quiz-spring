@@ -9,6 +9,9 @@ import com.agolumbowski.quiz_time.entity.Subject;
 import com.agolumbowski.quiz_time.repos.SubjectRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,7 +26,13 @@ public class SubjectService {
     public List<Subject> getAllSubjects(){
         return subjectRepository.findAll();
     }
+    public Page getAllSubjects(int page){
+        return subjectRepository.findAll(PageRequest.of(page, 2, Sort.by("id")));
+    }
     public Subject getSubjectById(long subjectId){
         return subjectRepository.getById(subjectId);
+    }
+    public void saveSubject(Subject subject){
+        subjectRepository.save(subject);
     }
 }

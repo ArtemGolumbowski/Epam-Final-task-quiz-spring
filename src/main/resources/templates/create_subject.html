@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" th:include="pageLayout :: page">
-    
+    <head>
+        <title>Spring Security Example </title>
+    </head>
     <body>
         <div th:fragment="content">
         <div th:if="${param.error}">
@@ -11,16 +13,11 @@
             This login is exist
         </div>
         <h1>Create test</h1>
-        <form th:action="@{/createanswer}" method="post">
-            <div><label> Description : <input type="text" name="description"/> </label></div>
-            <input type="hidden" name="questionId" th:value="${questionId}"/>
-             <div><label> Is correct? <select name="correct">
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-                     </select></label></div>
+        <form th:action="@{/createsubject}" method="post" th:object="${subject}">
+            <div><label> Name : <input type="text" name="name" th:field="*{name}"/> </label></div>
+            <div><label> Description : <input type="text" name="description" th:field="*{description}"/> </label></div>
             <div><input type="submit" value="ОK"/></div>
         </form>
         </div>
     </body>
 </html>
-
