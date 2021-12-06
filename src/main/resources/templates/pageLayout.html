@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" th:fragment="page" lang="${lang}">
+    <head>
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <select id="locales">
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+        </select>
+        <select name="Language">
+            <option th:href="@{/(lang=en)}">English</option>
+            <option th:href="@{/(lang=ru)}">Русский</option>
+        </select>
+        <h1 th:text="#{login.enter}"></h1>
+        <div><a th:href="@{/(lang=en)}">EN</a></div> <a th:href="@{/(lang=en)}">EN</a>
+        <div th:replace="fragments :: header">TODO write content</div>
+        
+        <div th:replace="this :: content">TODO write content</div>
+    </body>
+</html>

@@ -15,27 +15,27 @@
                     <th>DURATION</th>
                     <th>ACTIONS</th>
                 </tr>
-                <tr th:each="test : ${tests}">
-                    <td><a th:href="@{'/questions/' + ${test.id}}" th:text="${test.name}"></a></td>
-                    <td th:text="${test.description}">апр</td>
-                    <td th:text="${test.subject.description}">апр</td>
-                    <td th:text="${test.level}">ар</td>
-                    <td th:text="${test.duration}">пр</td>
-                    <td><form th:action="@{/edittest}" method="GET">
-                            <input type="hidden"  name="testId" th:value = "${test.id}"/>
+                <tr th:each="subject : ${subjects}">
+                    <td><a th:text="${subject.name}"></a></td>
+                    
+                    <td th:text="${subject.description}">апр</td>
+                   
+                   
+                    <td><form th:action="@{/editsubject}" method="GET">
+                            <input type="hidden"  name="subjectId" th:value = "${subject.id}"/>
                             <input type="submit" value="Edit" />
                         </form>
 
-                    <form th:action="@{/deletetest}" method="GET">
-                            <input type="hidden"  name="testId" th:value = "${test.id}"/>
+                    <form th:action="@{/deletesubject}" method="GET">
+                            <input type="hidden"  name="subjectId" th:value = "${subject.id}"/>
                             <input type="submit" value="Delete" />
                         </form>
                     </td>
                 </tr>
             </table>
                 <ul class="nav nav-pills">
-                    <li class="nav-item" th:each="i: ${#numbers.sequence(0, tests.totalPages-1)}">
-                        <a th:href="@{/tests/(page=${i})}"th:text="${i}" class="nav-link"></a>
+                    <li class="nav-item" th:each="i: ${#numbers.sequence(0, subjects.totalPages-1)}">
+                        <a th:href="@{/subjects/(page=${i})}"th:text="${i}" class="nav-link"></a>
                     </li>
                 </ul>
             </div>
@@ -43,7 +43,7 @@
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Sign Out"/>
         </form>
-        <a th:href="@{/createtest}">Create test</a>
+        <a th:href="@{/createsubject}">Create subject</a>
         </div>
     </body>
 </html>
