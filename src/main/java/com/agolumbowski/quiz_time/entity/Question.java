@@ -18,9 +18,9 @@ public class Question implements Serializable{
     @Column(name = "id")
     private long id;
     private String description;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Test test;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="question")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="question")
     private List <Answer> answers;
 
     public Question() {

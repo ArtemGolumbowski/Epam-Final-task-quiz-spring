@@ -6,10 +6,7 @@
 package com.agolumbowski.quiz_time.entity;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import org.springframework.security.core.GrantedAuthority;
 
 /**
  *
@@ -18,10 +15,15 @@ import javax.persistence.Table;
 
 
 
-public enum Role implements Serializable{
+public enum Role implements Serializable, GrantedAuthority{
  
     USER, 
  
     ADMIN;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
    
 }

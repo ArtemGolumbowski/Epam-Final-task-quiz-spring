@@ -16,7 +16,7 @@ import javax.persistence.*;
  */
 
 @Table(name = "test")
-@Entity
+@Entity()
 public class Test implements Serializable {
 
     @Id
@@ -30,10 +30,10 @@ public class Test implements Serializable {
 @Column
     private String level;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="test")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="test")
     private List<Question> questions;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Subject subject;
 @Column
     private long popularity;

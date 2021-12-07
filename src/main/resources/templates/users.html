@@ -8,18 +8,19 @@
             <div class="card">
             <table>
                 <tr>
-                    <th>NAME</th>
-                    <th>DESCRIPTION</th>
-                    <th>SUBJECT</th>
-                    <th>LEVEL</th>
-                    <th>DURATION</th>
-                    <th>ACTIONS</th>
+                    <th th:text='#{registration.login}'></th>
+                    <th th:text='#{admin.user.name}'></th>
+                    <th th:text='#{admin.user.surname}'></th>
+                    <th th:text='#{admin.blocked}'></th>
+                    <th th:text='#{user.role}'></th>
+                    <th th:text='#{admin.actions}'></th>
                 </tr>
                 <tr th:each="user : ${users}">
-                    <td><a th:text="${user.username}"></a></td>
+                    <td th:text="${user.username}"></td>
                     <td th:text="${user.name}">апр</td>
                     <td th:text="${user.surname}">апр</td>
                     <td th:text="${user.enabled}">ар</td>
+                    <td th:text="${user.roles}">апр</td>
                    
                     <td><form th:action="@{/edituser}" method="GET">
                             <input type="hidden"  name="userId" th:value = "${user.id}"/>
@@ -40,10 +41,8 @@
                 </ul>
             </div>
             </div>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
-        <a th:href="@{/createtest}">Create test</a>
+      
+        
         </div>
     </body>
 </html>
