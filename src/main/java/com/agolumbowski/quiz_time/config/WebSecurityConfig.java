@@ -6,7 +6,7 @@
 package com.agolumbowski.quiz_time.config;
 
 
-import javax.sql.DataSource;
+import com.agolumbowski.quiz_time.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,16 +20,15 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
  */
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+   
     @Autowired
-DataSource dataSource; 
+    private UserService userService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-       auth.jdbcAuthentication()
-               .dataSource( dataSource)
-               .passwordEncoder(NoOpPasswordEncoder.getInstance())
-               .usersByUsernameQuery("select username, password, enabled from users where username = ?")
-               .authoritiesByUsernameQuery("select u.username, ur.roles from users u inner join user_role ur on u.id = ur.user_id where u.username = ?");
+       auth.userDetailsService(userService)
+               .passwordEncoder(NoOpPasswordEncoder.getInstance());
+               
     }
     
     @Override

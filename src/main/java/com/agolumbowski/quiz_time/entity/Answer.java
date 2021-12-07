@@ -25,6 +25,11 @@ public class Answer implements Serializable {
     public Answer() {
     }
 
+    public Answer(String description, boolean correct) {
+        this.description = description;
+        this.correct = correct;
+    }
+
     public Answer(String description, boolean correct, Question question) {
         this.description = description;
         this.correct = correct;

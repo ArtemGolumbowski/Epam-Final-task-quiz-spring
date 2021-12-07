@@ -3,21 +3,67 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <title>Spring Security Example </title>
+           <link rel="stylesheet" th:href="@{/style.css}" />
     </head>
     <body>
+        <div><a th:href="@{('?locale=en')}">EN</a>
+        <a th:href="@{('?locale=ru')}">RU</a></div> 
         <div th:if="${param.error}">
             Invalid username and password.
         </div>
         <div th:if="${message}">
             This login is exist
         </div>
-        <h1>Registration page</h1>
-        <form th:action="@{/registration}" method="post">
-            <div><label> Login : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><label> Name: <input type="text" name="name"/> </label></div>
-            <div><label> Surname: <input type="text" name="surname"/> </label></div>
-            <div><input type="submit" value="Registration"/></div>
-        </form>
+     
+    
+        <div class="container">
+            <section id="content">
+<h2 th:text="#{registration.registrationpage}"></h2>
+                <form th:action="@{/registration}" method="POST">
+                    
+                    <h1 th:text="#{registration.login}">:</h1>
+   
+                    <div>
+                        <input type="text" name="username" required
+                               th:placeholder="#{registration.login}" id="login">
+                    </div>
+
+                    <h1 th:text="#{registration.password}">:</h1>
+                    <div>
+                        <input type="password" name="password" 
+                               required minlength="6" maxlength="18" 
+                               th:placeholder="#{registration.password}" id="password">
+                    </div>
+                    <h1 th:text="#{registration.name}"></h1>
+                    <div>
+                        <input type="text" name="name" required 
+                               minlength="2" maxlength="18" 
+                               th:placeholder="#{registration.name}" id="login">
+                    </div>
+                    <h1 th:text="#{registration.surname}"></h1>
+                    <div>
+                        <input type="text" name="surname" required minlength="2" 
+                               maxlength="30" th:placeholder="#{registration.surname}"
+                               id="login">
+                    </div>
+
+                    <div>
+                        <b th:text="#{registration.as}"/>: 
+                        <select name="role">
+                            <option value="USER" th:text="#{registration.user}"></option>                   
+                            <option value="ADMIN" th:text="#{registration.admin}"></option>
+                            
+                        </select>
+                    </div>
+                    <div>   
+                        <input type="submit" value="ОK" />
+                    </div>
+                    <div>
+                        <a th:href="@{/login}" th:text="#{registration.registered}">?</a>
+                    </div>
+                </form>
+
+            </section>
+        </div>
     </body>
 </html>

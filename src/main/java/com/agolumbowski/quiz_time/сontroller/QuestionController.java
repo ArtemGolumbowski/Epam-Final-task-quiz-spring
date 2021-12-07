@@ -58,8 +58,7 @@ public class QuestionController {
     @GetMapping("/answers/{questionId}")
     public String getAnswers(Model model, @PathVariable Long questionId) {
         Question question = questionService.getQuestionById(questionId);
-        model.addAttribute("question", question);
-        System.out.println(question);
+        model.addAttribute("question", question);    
         return "answers";
 }
 }

@@ -1,7 +1,6 @@
 package com.agolumbowski.quiz_time.config;
 
 import java.util.Locale;
-import org.springframework.boot.autoconfigure.web.WebProperties.LocaleResolver;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,23 +25,31 @@ public class MvcConfig implements WebMvcConfigurer {
         sessionLocaleResolver.setDefaultLocale(Locale.ENGLISH);
         return sessionLocaleResolver;
     }
+//    @Bean(name = "localeResolver")
+//	public CookieLocaleResolver getLocaleResolver()  {
+//		CookieLocaleResolver resolver= new CookieLocaleResolver();
+//		resolver.setCookieDomain("myAppLocaleCookie");
+//		// 60 minutes 
+//		resolver.setCookieMaxAge(60*60); 
+//		return resolver;
+//	} 
 
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-        localeChangeInterceptor.setParamName("language");
+
         return localeChangeInterceptor;
     }
-@Bean(name = "messageSource")
-	public MessageSource getMessageResource()  {
-		ReloadableResourceBundleMessageSource messageResource= new ReloadableResourceBundleMessageSource();
-		
-		// Read i18n/messages_xxx.properties file.
-		// For example: i18n/messages_en.properties
-		messageResource.setBasename("classpath:messages/lang");
-		messageResource.setDefaultEncoding("UTF-8");
-		return messageResource;
-	}
+
+    @Bean(name = "messageSource")
+    public MessageSource getMessageResource() {
+        ReloadableResourceBundleMessageSource messageResource = new ReloadableResourceBundleMessageSource();
+
+        messageResource.setBasename("classpath:messages/lang");
+        messageResource.setDefaultEncoding("UTF-8");
+        return messageResource;
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());

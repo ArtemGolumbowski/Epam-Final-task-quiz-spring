@@ -30,6 +30,10 @@
                             <input type="hidden"  name="testId" th:value = "${test.id}"/>
                             <input type="submit" value="Delete" />
                         </form>
+                        <form th:action="@{/startQuiz}" method="GET">
+                            <input type="hidden"  name="testId" th:value = "${test.id}"/>
+                            <input type="submit" value="Start" />
+                        </form>
                     </td>
                 </tr>
             </table>
@@ -40,9 +44,7 @@
                 </ul>
             </div>
             </div>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
+        
         <a th:href="@{/createtest}">Create test</a>
         </div>
     </body>
