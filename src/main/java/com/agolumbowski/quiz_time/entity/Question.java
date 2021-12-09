@@ -21,6 +21,7 @@ public class Question implements Serializable{
     @ManyToOne(fetch = FetchType.EAGER)
     private Test test;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="question")
+    @OrderBy("id")
     private List <Answer> answers;
 
     public Question() {

@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" th:include="pageLayout :: page">
+
+    <body>
+        <div th:fragment="content">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th th:text='#{user.test}'>Test name</th>
+                        
+                        <th th:text='#{admin.subject}'>Subject</th>
+                        <th th:text='#{admin.level}'></th>
+                        <th th:text='#{user.score}'></th>
+                        <th th:text='#{user.date}'></th>
+                        <th th:text='#{test.time}'></th>
+                        <th th:text='#{user.time}'></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr th:each="userTest : ${userTests}">
+                        <td th:text="${userTest.test.name}">апр</td>
+                        <td th:text="${userTest.test.subject.name}">апр</td>
+                        <td th:text="${userTest.test.level}">апр</td>
+                        <td th:text="${userTest.score}">апр</td>
+                        <td th:text="${userTest.userPassDate}">апр</td>
+                        <td th:text="${userTest.test.duration}">апр</td>
+                        <td th:text="${userTest.userQuizTime}">апр</td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+            <div id="logout">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th><fmt:message key="user.details"/></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><fmt:message key="registration.name"/>: ${user.name}</td>
+                        </tr>
+
+                        <tr>
+                            <td><fmt:message key="registration.surname"/>: ${user.surname}</td>
+                        </tr>
+
+                        <tr>
+                            <td><fmt:message key="registration.login"/>: ${user.login}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </body>
+</html>

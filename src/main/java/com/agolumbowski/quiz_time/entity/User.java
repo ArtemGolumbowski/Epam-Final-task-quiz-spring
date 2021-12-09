@@ -6,12 +6,14 @@
 package com.agolumbowski.quiz_time.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -41,8 +43,8 @@ public class User implements Serializable, UserDetails{
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    @OneToMany(mappedBy = "user")
-    List<UserTestBean> userTestBeans;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user",cascade = CascadeType.ALL)
+     private List<UserTestBean> userTestBeans;
 
     public User() {
 
@@ -58,6 +60,12 @@ public class User implements Serializable, UserDetails{
 
     }
 
+public void addUserTestBean(UserTestBean utb){
+    if(userTestBeans==null){
+        userTestBeans=new ArrayList<>();
+    }
+    userTestBeans.add(utb);
+}
     public long getId() {
         return id;
     }
@@ -66,6 +74,7 @@ public class User implements Serializable, UserDetails{
         this.id = id;
     }
 
+    @Override
     public String getUsername() {
         return username;
     }
@@ -74,6 +83,7 @@ public class User implements Serializable, UserDetails{
         this.username = username;
     }
 
+    @Override
     public boolean isEnabled() {
         return enabled;
     }
@@ -101,6 +111,7 @@ public class User implements Serializable, UserDetails{
     /**
      * @return the password
      */
+    @Override
     public String getPassword() {
         return password;
     }
@@ -130,7 +141,7 @@ public class User implements Serializable, UserDetails{
 
     @Override
     public String toString() {
-        return "User{" + " login=" + username + ", password=" + password + ", name=" + name + ", surname=" + surname + ", enabled=" + enabled + '}';
+        return "User{" + " login=" + username + ", password=" + password + ", name=" + name + ", surname=" + surname + ", enabled=" + enabled +'}';
     }
 
     @Override

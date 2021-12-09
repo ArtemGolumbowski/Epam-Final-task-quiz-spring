@@ -1,51 +1,57 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" th:include="pageLayout :: page">
-   
+
     <body>
         <div th:fragment="content">
-        <div class="container" th:fragment="content">
-            <div class="card">
-            <table>
-                <tr>
-                    <th>NAME</th>
-                    <th>DESCRIPTION</th>
-                    <th>SUBJECT</th>
-                    <th>LEVEL</th>
-                    <th>DURATION</th>
-                    <th>ACTIONS</th>
-                </tr>
-                <tr th:each="test : ${tests}">
-                    <td><a th:href="@{'/questions/' + ${test.id}}" th:text="${test.name}"></a></td>
-                    <td th:text="${test.description}">апр</td>
-                    <td th:text="${test.subject.description}">апр</td>
-                    <td th:text="${test.level}">ар</td>
-                    <td th:text="${test.duration}">пр</td>
-                    <td><form th:action="@{/edittest}" method="GET">
-                            <input type="hidden"  name="testId" th:value = "${test.id}"/>
-                            <input type="submit" value="Edit" />
-                        </form>
+            <div class="container" th:fragment="content">
+                <div class="card">
+                    <table>
+                        <tr>
+                            <th>NAME</th>
+                            <th>DESCRIPTION</th>
+                            <th>SUBJECT</th>
+                            <th>LEVEL</th>
+                            <th>DURATION</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                        <tr th:each="test : ${tests}">
+                            <td><a th:href="@{'/questions/' + ${test.id}}" th:text="${test.name}"></a></td>
+                            <td th:text="${test.description}">апр</td>
+                            <td th:text="${test.subject.description}">апр</td>
+                            <td th:text="${test.level}">ар</td>
+                            <td th:text="${test.duration}">пр</td>
 
-                    <form th:action="@{/deletetest}" method="GET">
-                            <input type="hidden"  name="testId" th:value = "${test.id}"/>
-                            <input type="submit" value="Delete" />
-                        </form>
-                        <form th:action="@{/startQuiz}" method="GET">
-                            <input type="hidden"  name="testId" th:value = "${test.id}"/>
-                            <input type="submit" value="Start" />
-                        </form>
-                    </td>
-                </tr>
-            </table>
-                <ul class="nav nav-pills">
-                    <li class="nav-item" th:each="i: ${#numbers.sequence(0, tests.totalPages-1)}">
-                        <a th:href="@{/tests/(page=${i})}"th:text="${i}" class="nav-link"></a>
-                    </li>
-                </ul>
+                            <td><div sec:authorize="hasAuthority('ADMIN')"><form th:action="@{/edittest}" method="GET">
+                                        <input type="hidden"  name="testId" th:value = "${test.id}"/>
+                                        <input type="submit" value="Edit" />
+                                    </form>
+
+                                    <form th:action="@{/deletetest}" method="GET">
+                                        <input type="hidden"  name="testId" th:value = "${test.id}"/>
+                                        <input type="submit" value="Delete" />
+                                    </form>
+                                </div>
+                                <form th:action="@{/startQuiz}" method="GET">
+                                    <input type="hidden"  name="testId" th:value = "${test.id}"/>
+                                    <input type="submit" value="Start" />
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                    <ul class="nav nav-pills">
+                        <li class="nav-item" th:each="i: ${#numbers.sequence(0, tests.totalPages-1)}">
+                            <a th:href="@{/tests/(page=${i})}"th:text="${i}" class="nav-link"></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
+<div sec:authorize="hasAuthority('ADMIN')">
+            <a th:href="@{/createtest}">Create test</a>
+        </div>
+            <div sec:authorize="hasAuthority('USER')">
+                <a th:href="@{/results}" th:text='#{user.results}'>Results</a>
             </div>
-        
-        <a th:href="@{/createtest}">Create test</a>
         </div>
     </body>
 </html>

@@ -36,15 +36,12 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
-        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-
-        return localeChangeInterceptor;
+        return new LocaleChangeInterceptor();
     }
 
     @Bean(name = "messageSource")
     public MessageSource getMessageResource() {
         ReloadableResourceBundleMessageSource messageResource = new ReloadableResourceBundleMessageSource();
-
         messageResource.setBasename("classpath:messages/lang");
         messageResource.setDefaultEncoding("UTF-8");
         return messageResource;

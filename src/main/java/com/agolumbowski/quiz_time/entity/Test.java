@@ -30,10 +30,11 @@ public class Test implements Serializable {
 @Column
     private String level;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="test")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="test")
+    @OrderBy("id")
     private List<Question> questions;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     private Subject subject;
 @Column
     private long popularity;

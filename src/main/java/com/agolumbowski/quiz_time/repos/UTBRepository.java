@@ -5,7 +5,8 @@
  */
 package com.agolumbowski.quiz_time.repos;
 
-import com.agolumbowski.quiz_time.entity.Question;
+import com.agolumbowski.quiz_time.entity.User;
+import com.agolumbowski.quiz_time.entity.UserTestBean;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,8 +14,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author agolu
  */
-public interface QuestionRepository extends JpaRepository<Question, Long> {
-    public List<Question> findAllByTestId(long testId);
-    public List<Question> findAllByTestIdOrderById(long testId);
-   
+public interface UTBRepository extends JpaRepository<UserTestBean, Long> {
+    public List<UserTestBean> findAllByUser(User user);
 }

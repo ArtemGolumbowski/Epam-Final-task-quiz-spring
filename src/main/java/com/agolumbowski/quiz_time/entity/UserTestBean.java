@@ -9,10 +9,12 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -28,13 +30,24 @@ public class UserTestBean implements Serializable {
     @Column(name = "id")
     private Long id;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
-    @ManyToOne
+    @OneToOne
     private Test test;
     private int score;
     private long userQuizTime;
     private LocalDateTime userPassDate;
+
+    public UserTestBean() {
+    }
+
+    public UserTestBean(User user, Test test, int score, long userQuizTime, LocalDateTime userPassDate) {
+        this.user = user;
+        this.test = test;
+        this.score = score;
+        this.userQuizTime = userQuizTime;
+        this.userPassDate = userPassDate;
+    }
 
     public User getUser() {
         return user;
