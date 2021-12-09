@@ -28,8 +28,7 @@ public class TestingUtils {
             Answer answer = new Answer(userAnswer, true);
             userAnswerList.add(answer);
         }
-        answers = answers.stream().filter(answer->answer.isCorrect())
-                .collect(Collectors.toList());  
+        answers = answers.stream().filter(answer->answer.isCorrect()).collect(Collectors.toList());  
         if (userAnswerList.equals(answers)) {
             return 1;
         }

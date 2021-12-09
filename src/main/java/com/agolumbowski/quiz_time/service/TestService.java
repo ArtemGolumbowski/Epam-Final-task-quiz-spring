@@ -3,9 +3,7 @@ package com.agolumbowski.quiz_time.service;
 
 import com.agolumbowski.quiz_time.entity.Subject;
 import com.agolumbowski.quiz_time.entity.Test;
-import com.agolumbowski.quiz_time.repos.SubjectRepository;
 import com.agolumbowski.quiz_time.repos.TestRepository;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;

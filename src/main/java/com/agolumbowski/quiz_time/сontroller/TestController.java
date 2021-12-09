@@ -35,7 +35,6 @@ public class TestController {
     public String getTestsPage(Model model,@RequestParam(defaultValue="0")int page) {
         Page testPage = testService.getAllTests(page);
         model.addAttribute("tests", testPage);
-        System.out.println(testPage);
         return "tests";
     }
 
