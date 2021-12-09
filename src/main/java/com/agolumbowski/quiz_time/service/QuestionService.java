@@ -26,6 +26,9 @@ public class QuestionService {
     public List<Question> getQuestionsByTestId(long testId){
        return questionRepository.findAllByTestId(testId);
     }
+    public List<Question> getQuestionsInOrder(long testId){
+       return questionRepository.findAllByTestIdOrderById(testId);
+    }
     public void createQuestion(Question question, long testId){
        Test test = testRepository.getById(testId);
        question.setTest(test);

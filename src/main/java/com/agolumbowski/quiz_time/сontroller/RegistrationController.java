@@ -7,9 +7,10 @@ package com.agolumbowski.quiz_time.сontroller;
 
 import com.agolumbowski.quiz_time.entity.Role;
 import com.agolumbowski.quiz_time.entity.User;
-import com.agolumbowski.quiz_time.repos.UserRepository;
+import com.agolumbowski.quiz_time.service.UserService;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,24 +22,31 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class RegistrationController {
+
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @GetMapping("/registration")
-    public String getRegistrationPage(){
+    public String getRegistrationPage() {
         return "registration";
     }
+
     @PostMapping("/registration")
-    public String addUser(User user, Model model){
-        User userCheck = userRepository.findByUsername(user.getUsername());
-        if(userCheck!=null){
+    public String addUser(User user, String role, Model model) {
+        if (userService.checkUserIsExist(user)) {
             model.addAttribute("message", "this user is exist");
             return "registration";
         }
-        Set<Role>roles=Set.of(Role.ADMIN);
-       
-        user.setEnabled(true);
+        Role userRole = Role.valueOf(role.toUpperCase());
+        Set<Role> roles = Set.of(userRole);
         user.setRoles(roles);
-        userRepository.save(user);
+        String hashPass = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashPass);
+        user.setEnabled(true);
+        userService.addUser(user);
+
         return "redirect:/login";
     }
 }
