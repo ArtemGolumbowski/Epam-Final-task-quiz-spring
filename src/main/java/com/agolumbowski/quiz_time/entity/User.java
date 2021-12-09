@@ -13,7 +13,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

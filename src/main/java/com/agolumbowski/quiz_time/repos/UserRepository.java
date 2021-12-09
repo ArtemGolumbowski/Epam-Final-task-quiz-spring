@@ -7,7 +7,6 @@ package com.agolumbowski.quiz_time.repos;
 
 import com.agolumbowski.quiz_time.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
 /**
  *

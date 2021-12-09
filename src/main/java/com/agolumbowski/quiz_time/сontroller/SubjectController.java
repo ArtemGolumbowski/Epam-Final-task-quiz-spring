@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -22,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class SubjectController {
+    
     @Autowired
     private SubjectService subjectService;
+    
    @GetMapping("/subjects")
     public String getTestsPage(Model model,@RequestParam(defaultValue="0")int page) {
         Page subjectPage = subjectService.getAllSubjects(page);
@@ -31,6 +32,7 @@ public class SubjectController {
  
         return "subjects";
     }
+    
     @GetMapping("/createsubject")
     public String getCreatePage(Model model){
         Subject subject = new Subject();
@@ -38,12 +40,14 @@ public class SubjectController {
         return "create_subject";
         
     }
+    
     @GetMapping("/editsubject")
     public String getEditPage(Model model, long subjectId){
         Subject subject = subjectService.getSubjectById(subjectId);
         model.addAttribute("subject", subject);
         return "editsubject";
     }
+    
     @PostMapping("/editsubject")
     public String editSubject(Subject subject){
         subjectService.saveSubject(subject);

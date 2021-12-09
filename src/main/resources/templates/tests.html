@@ -8,12 +8,12 @@
                 <div class="card">
                     <table>
                         <tr>
-                            <th>NAME</th>
-                            <th>DESCRIPTION</th>
-                            <th>SUBJECT</th>
-                            <th>LEVEL</th>
-                            <th>DURATION</th>
-                            <th>ACTIONS</th>
+                            <th th:text='#{admin.test.name}'></th>
+                    <th th:text='#{admin.description}'></th>
+                    <th th:text='#{admin.subject}'></th>
+                    <th th:text='#{admin.level}'></th>
+                    <th th:text='#{admin.description}'></th>
+                    <th th:text='#{admin.actions}'></th>
                         </tr>
                         <tr th:each="test : ${tests}">
                             <td><a th:href="@{'/questions/' + ${test.id}}" th:text="${test.name}"></a></td>

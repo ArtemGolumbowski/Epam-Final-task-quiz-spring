@@ -6,9 +6,7 @@
 package com.agolumbowski.quiz_time.repos;
 
 import com.agolumbowski.quiz_time.entity.Subject;
-import javax.persistence.Id;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
 /**
  *

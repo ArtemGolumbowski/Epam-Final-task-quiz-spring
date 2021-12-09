@@ -47,8 +47,7 @@ public class QuizController {
     @GetMapping("/startQuiz")
     public String startQuiz(@RequestParam long testId) {
 
-//List<Question>questions=questionService.getQuestionsInOrder(testId);
-//        httpSession.setAttribute("questions", questions);
+
         LocalDateTime start = LocalDateTime.now();
         httpSession.setAttribute("start", start);
         httpSession.setAttribute("testId", testId);
@@ -59,16 +58,10 @@ public class QuizController {
 
     @GetMapping("/quiz")
     public String quiz(Model model) {
-
         long testId = (Long) httpSession.getAttribute("testId");
-//List<Question>questions=(List<Question>)httpSession.getAttribute("questions");
         int currentQuestion = (Integer) httpSession.getAttribute("currentQuestion");
         Test test = testService.getTestById(testId);
         Question question = test.getQuestions().get(currentQuestion);
-//        Question question=questions.get(currentQuestion);
-System.out.println(test);
-        System.out.println(currentQuestion);
-        System.out.println(question);
         model.addAttribute("question", question);
         return "quizAnswers";
     }
@@ -77,7 +70,6 @@ System.out.println(test);
     public String quizCheck(String finish, String[] userAnswer, @AuthenticationPrincipal User user) {
         long testId = (Long) httpSession.getAttribute("testId");
         int currentQuestion = (Integer) httpSession.getAttribute("currentQuestion");
-//List<Question>questions=(List<Question>)httpSession.getAttribute("questions");
 
         Test test = testService.getTestById(testId);
         Question question = test.getQuestions().get(currentQuestion);
@@ -103,8 +95,7 @@ System.out.println(test);
     }
      @GetMapping("/results")
     public String quiz(Model model, @AuthenticationPrincipal User user) {
-         System.out.println(user);
-         System.out.println(user.getUserTestBeans());
+
         model.addAttribute("userTests", user.getUserTestBeans());
         return "results";
     }
