@@ -19,7 +19,7 @@
                     <td th:text="${user.username}"></td>
                     <td th:text="${user.name}">апр</td>
                     <td th:text="${user.surname}">апр</td>
-                    <td th:text="${user.enabled}">ар</td>
+                    <td th:text="${!user.enabled}">ар</td>
                     <td th:text="${user.roles}">апр</td>
                    
                     <td><form th:action="@{/edituser}" method="GET">
@@ -27,7 +27,7 @@
                             <input type="submit" value="Edit" />
                         </form>
 
-                    <form th:action="@{/deleteuser}" method="GET">
+                    <form th:action="@{/deleteuser}" method="POST">
                             <input type="hidden"  name="userId" th:value = "${user.id}"/>
                             <input type="submit" value="Delete" />
                         </form>

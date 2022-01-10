@@ -1,4 +1,3 @@
-
 package com.agolumbowski.quiz_time.service;
 
 import com.agolumbowski.quiz_time.entity.Subject;
@@ -17,22 +16,35 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TestService {
+
     @Autowired
     private SubjectService subjectService;
     @Autowired
     private TestRepository testRepository;
-    public Page getAllTests(int page){
-        return testRepository.findAll(PageRequest.of(page, 2, Sort.by("id")));
+
+    public Page getAllTests(int page, String sort) {
+        return testRepository.findAll(PageRequest.of(page, 2, Sort.by(sort)));
     }
-    public void saveTest(Test test, long subjectId){
+
+    public Page getTestsBySubject(int page, String sort, String subject) {
+        if (subject.equalsIgnoreCase("all")) {
+            return testRepository.findAll(PageRequest.of(page, 2, Sort.by(sort)));
+        } else {
+            return testRepository.findBySubjectName(subject, PageRequest.of(page, 2, Sort.by(sort)));
+        }
+    }
+
+    public void saveTest(Test test, long subjectId) {
         Subject subject = subjectService.getSubjectById(subjectId);
         test.setSubject(subject);
         testRepository.save(test);
     }
-    public Test getTestById(long testId){
+
+    public Test getTestById(long testId) {
         return testRepository.getById(testId);
     }
-    public void deleteTest(long testId){
-         testRepository.deleteById(testId);
+
+    public void deleteTest(long testId) {
+        testRepository.deleteById(testId);
     }
 }

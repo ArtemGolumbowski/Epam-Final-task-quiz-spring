@@ -3,18 +3,19 @@
   
     <body>
         <div th:fragment="content">
-        <h1>Edit test</h1>
+        <h1 th:text='#{admin.edit}'>Edit test</h1>
         <form th:action="@{/editquestion}" method="post">
             <input type="hidden"  name="id" th:value = "${question.id}"/>
             <input type="hidden"  name="testId" th:value = "${question.test.id}"/>
-            <div><label> Description : <input type="text" name="description" 
-                                              th:value="${question.description}"/> </label></div>
+            <div><label th:text='#{admin.description}'> Description :</label> <input type="text" name="description" 
+                                              th:value="${question.description}"/> </div>
                      
             <div><input type="submit" value="ОK"/></div>
         </form>
         <form th:action="@{'/questions/' + ${question.test.id}}">
             <input type="submit" value="Close" />
         </form>
+        
         </div>
     </body>
 </html>

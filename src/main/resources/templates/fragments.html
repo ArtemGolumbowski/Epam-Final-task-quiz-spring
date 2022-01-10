@@ -4,15 +4,15 @@
     <body>
         <div th:fragment="header">
             <form id="logout" th:action="@{/logout}" method="post">
-            <input type="submit" th:value="#{login.out}"/>
-        </form>
-        <ul class="navbar">
-        <li><a th:href="@{/tests}"th:text='#{admin.tests}'>tests</a></li>
-        <div sec:authorize="hasAuthority('ADMIN')">
-        <li><a th:href="@{/users}"th:text='#{admin.users}'>users</a></li>
-        <li><a th:href="@{/subjects}"th:text='#{admin.subjects}'>subjects</a></li>
-        </div>
-    </ul>
+                <input type="submit" th:value="#{login.out}"/>
+            </form>
+            <ul class="navbar">
+                <div sec:authorize="hasAuthority('ADMIN')">
+                    <li><a th:href="@{/tests}"th:text='#{admin.tests}'>tests</a></li>
+                    <li><a th:href="@{/users}"th:text='#{admin.users}'>users</a></li>
+                    <li><a th:href="@{/subjects}"th:text='#{admin.subjects}'>subjects</a></li>
+                </div>
+            </ul>
         </div>
     </body>
 </html>

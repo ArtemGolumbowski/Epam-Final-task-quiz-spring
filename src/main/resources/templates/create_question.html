@@ -4,15 +4,10 @@
   
     <body>
         <div th:fragment="content">
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${message}">
-            This login is exist
-        </div>
-        <h1>Create test</h1>
+        
+        <h1 th:text='#{question.create}'>Create test</h1>
         <form th:action="@{/createquestion}" method="post">
-            <div><label> Description : <input type="text" name="description"/> </label></div>
+            <div><label th:text='#{admin.description}'> Description : </label><input type="text" name="description"/> </div>
             <input type="hidden" name="testId" th:value="${testId}"/>
 
             <div><input type="submit" value="ОK"/></div>

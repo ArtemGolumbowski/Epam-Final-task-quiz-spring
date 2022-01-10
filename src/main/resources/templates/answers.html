@@ -8,9 +8,9 @@
     
         <div><table>
                 <tr>
-                    <th>DESCRIPTION</th>
-                    <th>correct</th>
-                    <th>actions</th>
+                    <th th:text='#{admin.description}'>DESCRIPTION</th>
+                    <th th:text='#{answer.value}'>correct</th>
+                    <th th:text='#{admin.actions}'>actions</th>
                 </tr>
                 <tr th:each="answer : ${question.answers}">
                     <td th:text="${answer.description}">gf</td>
@@ -27,7 +27,7 @@
                     </td>
                 </tr>
             </table></div>
-        <a th:href="@{'/createanswer/'+${question.id}}">Create answer</a>
+        <a th:href="@{'/createanswer/'+${question.id}}" th:text='#{answer.create}'>Create answer</a>
        
         </div>
     </body>

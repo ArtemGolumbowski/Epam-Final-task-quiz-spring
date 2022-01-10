@@ -6,8 +6,8 @@
         <div th:fragment="content">
         <div><table>
                 <tr>
-                    <th>DESCRIPTION</th>
-                    <th>ACTIONS</th>
+                    <th th:text='#{admin.description}'>DESCRIPTION</th>
+                    <th th:text='#{admin.actions}'>ACTIONS</th>
                 </tr>
                 <tr th:each="question : ${questions}">
                     <td><a th:href="@{'/answers/' + ${question.id}}" th:text="${question.description}"></a></td>
@@ -24,8 +24,8 @@
                     </td>
                 </tr>
             </table></div>
-        <a th:href="@{'/createquestion/'+${testId}}">Create question</a>
-        
+        <a th:href="@{'/createquestion/'+${testId}}" th:text='#{question.create}'>Create question</a>
+       
         </div>
     </body>
 </html>

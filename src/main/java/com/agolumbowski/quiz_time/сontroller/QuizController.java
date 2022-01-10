@@ -33,7 +33,8 @@ import utils.TestingUtils;
  */
 @Controller
 public class QuizController {
-@Autowired
+
+    @Autowired
     private UserService userService;
     @Autowired
     private QuestionService questionService;
@@ -46,7 +47,6 @@ public class QuizController {
 
     @GetMapping("/startQuiz")
     public String startQuiz(@RequestParam long testId) {
-
 
         LocalDateTime start = LocalDateTime.now();
         httpSession.setAttribute("start", start);
@@ -82,10 +82,14 @@ public class QuizController {
             LocalDateTime finishTime = LocalDateTime.now();
             LocalDateTime start = (LocalDateTime) httpSession.getAttribute("start");
             long userTime = Duration.between(start, finishTime).toMinutes();
-            UserTestBean userTestBean=new UserTestBean( user,test,result,userTime,finishTime);            
+            UserTestBean userTestBean = new UserTestBean(user, test, result, userTime, finishTime);
             user.addUserTestBean(userTestBean);
             userService.saveUser(user);
-           return "redirect:/results";
+            httpSession.removeAttribute("start");
+            httpSession.removeAttribute("testId");
+            httpSession.removeAttribute("rightAnswerCount");
+            httpSession.removeAttribute("currentQuestion");
+            return "redirect:/results";
         } else {
             currentQuestion++;
             httpSession.setAttribute("rightAnswerCount", rightAnswerCount);
@@ -93,10 +97,12 @@ public class QuizController {
         }
         return "redirect:/quiz";
     }
-     @GetMapping("/results")
+
+    @GetMapping("/results")
     public String quiz(Model model, @AuthenticationPrincipal User user) {
 
         model.addAttribute("userTests", user.getUserTestBeans());
+        model.addAttribute("user", user);
         return "results";
     }
 }

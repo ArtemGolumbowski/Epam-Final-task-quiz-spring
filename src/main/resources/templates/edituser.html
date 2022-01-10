@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" th:include="pageLayout :: page">
+   
+    <body>
+        <div th:fragment="content" class="container">
+        <h1 th:text="#{admin.edit}"></h1>
+        <form th:action="@{/edituser}" method="post" th:object="${user}">
+            <input type="hidden"  name="id" th:value = "${user.id}" 
+                   th:field="*{id}"/>
+            <div><label th:text="#{registration.login}"> Name : </label><input type="text" name="username" 
+                                       th:value="${user.username}" 
+                                       th:field="*{username}"/> </div>
+            <div><label th:text="#{admin.user.name}"> Description : </label><input type="text" name="name" 
+                                              th:value="${user.name}"
+                                              th:field="*{name}"/> </div>
+            <div><label th:text="#{admin.user.surname}"> Name : </label><input type="text" name="surname" 
+                                       th:value="${user.surname}" 
+                                       th:field="*{surname}"/> </div>
+            
+            <select name="enabled" th:field="*{enabled}">
+                <option th:value="TRUE" th:text="#{user.unblock}"></option>
+                <option th:value="FALSE" th:text="#{user.block}" ></option>
+            </select>
+            <input type="checkbox" name="" th:value="ADMIN" th:text="#{user.admin}"
+                   th:field="*{roles}"/>
+            <input type="checkbox" name="" th:value="USER" th:text="#{user.user}"
+                   th:field="*{roles}"/>
+
+            <div><input type="submit" value="ОK"/></div>
+        </form>
+        <form action="/users">
+            <input type="submit" value="Close" />
+        </form>
+        </div>
+    </body>
+</html>

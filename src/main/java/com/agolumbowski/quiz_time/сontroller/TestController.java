@@ -32,9 +32,17 @@ public class TestController {
     private SubjectService subjectService;
 
     @GetMapping("/tests")
-    public String getTestsPage(Model model,@RequestParam(defaultValue="0")int page) {
-        Page testPage = testService.getAllTests(page);
+    public String getTestsPage(Model model,@RequestParam(defaultValue="0")int page
+                                , @RequestParam(defaultValue="all")String currentSubject
+                                , @RequestParam(defaultValue="id")String sort) {
+        Page testPage = testService.getTestsBySubject(page, sort, currentSubject);
+//        Page testPage = testService.getAllTests(page, sort);
+        List<Subject> subjects = subjectService.getAllSubjects();
+        model.addAttribute("subjects", subjects);
+      
         model.addAttribute("tests", testPage);
+        model.addAttribute("currentSubject", currentSubject);
+        model.addAttribute("sort", sort);
         return "tests";
     }
 

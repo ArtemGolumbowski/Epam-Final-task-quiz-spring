@@ -30,23 +30,22 @@ public class RegistrationController {
 
     @GetMapping("/registration")
     public String getRegistrationPage() {
+       
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String addUser(User user, String role, Model model) {
+    public String addUser(User user, Model model) {
         if (userService.checkUserIsExist(user)) {
             model.addAttribute("message", "this user is exist");
             return "registration";
         }
-        Role userRole = Role.valueOf(role.toUpperCase());
-        Set<Role> roles = Set.of(userRole);
+        Set<Role> roles = Set.of(Role.USER);
         user.setRoles(roles);
         String hashPass = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashPass);
         user.setEnabled(true);
         userService.addUser(user);
-
         return "redirect:/login";
     }
 }

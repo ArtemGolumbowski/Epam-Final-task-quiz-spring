@@ -25,7 +25,6 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
-   
 
     public Page getAllUsers(int page) {
         return userRepository.findAll(PageRequest.of(page, 2, Sort.by("id")));
@@ -39,12 +38,20 @@ public class UserService implements UserDetailsService {
     public void saveUser(User user) {
         userRepository.save(user);
     }
-public void addUser(User user) {
-        
+
+    public void addUser(User user) {
+
         userRepository.save(user);
     }
+
     public boolean checkUserIsExist(User user) {
         User userCheck = userRepository.findByUsername(user.getUsername());
-      return userCheck!=null;
+        return userCheck != null;
+    }
+    public void deleteUser(long userId){
+        userRepository.deleteById(userId);
+    }
+    public User findUserById(long userId){
+       return userRepository.getById(userId);
     }
 }
