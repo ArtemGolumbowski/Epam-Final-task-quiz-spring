@@ -6,8 +6,8 @@
 package com.agolumbowski.quiz_time.сontroller;
 
 import com.agolumbowski.quiz_time.entity.Subject;
-import com.agolumbowski.quiz_time.service.SubjectService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.agolumbowski.quiz_time.serviceexp.SubjectService;
+
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,14 +22,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class SubjectController {
     
-    @Autowired
-    private SubjectService subjectService;
-    
+    private final SubjectService subjectService;
+
+    public SubjectController(SubjectService subjectService) {
+        this.subjectService = subjectService;
+    }
+     
    @GetMapping("/subjects")
     public String getTestsPage(Model model,@RequestParam(defaultValue="0")int page) {
-        Page subjectPage = subjectService.getAllSubjects(page);
+        Page subjectPage = subjectService.getAllSubjectsPage(page);
         model.addAttribute("subjects", subjectPage);
- 
         return "subjects";
     }
     
@@ -43,14 +45,14 @@ public class SubjectController {
     
     @GetMapping("/editsubject")
     public String getEditPage(Model model, long subjectId){
-        Subject subject = subjectService.getSubjectById(subjectId);
+        Subject subject = subjectService.read(subjectId);
         model.addAttribute("subject", subject);
         return "editsubject";
     }
     
     @PostMapping("/editsubject")
     public String editSubject(Subject subject){
-        subjectService.saveSubject(subject);
+        subjectService.save(subject);
         return "redirect:/subjects";
     }
 }

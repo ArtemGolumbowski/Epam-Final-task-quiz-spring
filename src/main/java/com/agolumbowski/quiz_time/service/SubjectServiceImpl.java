@@ -7,8 +7,8 @@ package com.agolumbowski.quiz_time.service;
 
 import com.agolumbowski.quiz_time.entity.Subject;
 import com.agolumbowski.quiz_time.repos.SubjectRepository;
+import com.agolumbowski.quiz_time.serviceexp.SubjectService;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -19,20 +19,36 @@ import org.springframework.stereotype.Service;
  * @author agolu
  */
 @Service
-public class SubjectService {
-    @Autowired
-    private SubjectRepository subjectRepository;
-    
-    public List<Subject> getAllSubjects(){
+public class SubjectServiceImpl implements SubjectService {
+
+    private final SubjectRepository subjectRepository;
+
+    public SubjectServiceImpl(SubjectRepository subjectRepository) {
+        this.subjectRepository = subjectRepository;
+    }
+
+    @Override
+    public List<Subject> getAllSubjects() {
         return subjectRepository.findAll();
     }
-    public Page getAllSubjects(int page){
+
+    @Override
+    public Page getAllSubjectsPage(int page) {
         return subjectRepository.findAll(PageRequest.of(page, 2, Sort.by("id")));
     }
-    public Subject getSubjectById(long subjectId){
+
+    @Override
+    public Subject read(long subjectId) {
         return subjectRepository.getById(subjectId);
     }
-    public void saveSubject(Subject subject){
-        subjectRepository.save(subject);
+
+    @Override
+    public Subject save(Subject subject) {
+        return subjectRepository.save(subject);
+    }
+
+    @Override
+    public void delete(long id) {
+        subjectRepository.deleteById(id);
     }
 }

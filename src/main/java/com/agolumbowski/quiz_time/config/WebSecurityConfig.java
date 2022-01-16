@@ -5,7 +5,8 @@
  */
 package com.agolumbowski.quiz_time.config;
 
-import com.agolumbowski.quiz_time.service.UserService;
+
+import com.agolumbowski.quiz_time.serviceexp.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

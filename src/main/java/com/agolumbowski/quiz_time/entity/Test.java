@@ -14,7 +14,6 @@ import javax.persistence.*;
  *
  * @author agolu
  */
-
 @Table(name = "test")
 @Entity()
 public class Test implements Serializable {
@@ -23,22 +22,22 @@ public class Test implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-@Column
+    @Column
     private String name;
-@Column
+    @Column
     private String description;
-@Column
+    @Column
     private String level;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="test")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "test")
     @OrderBy("id")
     private List<Question> questions;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Subject subject;
-@Column
+    @Column
     private long popularity;
-@Column
+    @Column
     private long duration;
 
     /**

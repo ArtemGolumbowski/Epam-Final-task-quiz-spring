@@ -10,15 +10,13 @@ import com.agolumbowski.quiz_time.entity.Question;
 import com.agolumbowski.quiz_time.entity.Test;
 import com.agolumbowski.quiz_time.entity.User;
 import com.agolumbowski.quiz_time.entity.UserTestBean;
-import com.agolumbowski.quiz_time.service.QuestionService;
-import com.agolumbowski.quiz_time.service.QuizService;
-import com.agolumbowski.quiz_time.service.TestService;
-import com.agolumbowski.quiz_time.service.UserService;
+import com.agolumbowski.quiz_time.serviceexp.TestService;
+import com.agolumbowski.quiz_time.serviceexp.UserService;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,16 +32,15 @@ import utils.TestingUtils;
 @Controller
 public class QuizController {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private QuestionService questionService;
-    @Autowired
-    private TestService testService;
-    @Autowired
-    private HttpSession httpSession;
-    @Autowired
-    private QuizService quizService;
+    private final UserService userService;
+    private final TestService testService;
+    private final HttpSession httpSession;
+
+    public QuizController(UserService userService, TestService testService, HttpSession httpSession) {
+        this.userService = userService;
+        this.testService = testService;
+        this.httpSession = httpSession;
+    }
 
     @GetMapping("/startQuiz")
     public String startQuiz(@RequestParam long testId) {
@@ -60,7 +57,7 @@ public class QuizController {
     public String quiz(Model model) {
         long testId = (Long) httpSession.getAttribute("testId");
         int currentQuestion = (Integer) httpSession.getAttribute("currentQuestion");
-        Test test = testService.getTestById(testId);
+        Test test = testService.read(testId);
         Question question = test.getQuestions().get(currentQuestion);
         model.addAttribute("question", question);
         return "quizAnswers";
@@ -71,7 +68,7 @@ public class QuizController {
         long testId = (Long) httpSession.getAttribute("testId");
         int currentQuestion = (Integer) httpSession.getAttribute("currentQuestion");
 
-        Test test = testService.getTestById(testId);
+        Test test = testService.read(testId);
         Question question = test.getQuestions().get(currentQuestion);
         int size = test.getQuestions().size();
         int rightAnswerCount = (Integer) httpSession.getAttribute("rightAnswerCount");
@@ -84,7 +81,7 @@ public class QuizController {
             long userTime = Duration.between(start, finishTime).toMinutes();
             UserTestBean userTestBean = new UserTestBean(user, test, result, userTime, finishTime);
             user.addUserTestBean(userTestBean);
-            userService.saveUser(user);
+            userService.save(user);
             httpSession.removeAttribute("start");
             httpSession.removeAttribute("testId");
             httpSession.removeAttribute("rightAnswerCount");

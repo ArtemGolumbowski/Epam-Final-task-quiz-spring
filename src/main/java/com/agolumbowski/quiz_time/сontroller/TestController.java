@@ -7,10 +7,10 @@ package com.agolumbowski.quiz_time.сontroller;
 
 import com.agolumbowski.quiz_time.entity.Subject;
 import com.agolumbowski.quiz_time.entity.Test;
-import com.agolumbowski.quiz_time.service.SubjectService;
-import com.agolumbowski.quiz_time.service.TestService;
+
+import com.agolumbowski.quiz_time.service.TestServiceImpl;
+import com.agolumbowski.quiz_time.serviceexp.SubjectService;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,20 +26,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class TestController {
 
-    @Autowired
-    private TestService testService;
-    @Autowired
-    private SubjectService subjectService;
+    public TestController(TestServiceImpl testService, SubjectService subjectService) {
+        this.testService = testService;
+        this.subjectService = subjectService;
+    }
+    
+    private final TestServiceImpl testService;
+    private final SubjectService subjectService;
 
     @GetMapping("/tests")
-    public String getTestsPage(Model model,@RequestParam(defaultValue="0")int page
-                                , @RequestParam(defaultValue="all")String currentSubject
-                                , @RequestParam(defaultValue="id")String sort) {
+    public String getTestsPage(Model model, @RequestParam(defaultValue = "0") int page,
+             @RequestParam(defaultValue = "all") String currentSubject,
+             @RequestParam(defaultValue = "id") String sort) {
         Page testPage = testService.getTestsBySubject(page, sort, currentSubject);
-//        Page testPage = testService.getAllTests(page, sort);
         List<Subject> subjects = subjectService.getAllSubjects();
         model.addAttribute("subjects", subjects);
-      
         model.addAttribute("tests", testPage);
         model.addAttribute("currentSubject", currentSubject);
         model.addAttribute("sort", sort);
@@ -49,19 +50,21 @@ public class TestController {
     @GetMapping("/createtest")
     public String createTestPage(Model model) {
         List<Subject> subjects = subjectService.getAllSubjects();
+        Test test = new Test();
         model.addAttribute("subjects", subjects);
+        model.addAttribute("test", test);
         return "create_test";
     }
 
     @PostMapping("/createtest")
-    public String createTest(Test test, long subjectId) {
-        testService.saveTest(test, subjectId);
+    public String createTest(Test test) {
+        testService.save(test);
         return "redirect:/tests";
     }
 
     @GetMapping("/edittest")
     public String editTestPage(Model model, long testId) {
-        Test test = testService.getTestById(testId);
+        Test test = testService.read(testId);
         List<Subject> subjects = subjectService.getAllSubjects();
         model.addAttribute("subjects", subjects);
         model.addAttribute("test", test);
@@ -75,7 +78,7 @@ public class TestController {
 
     @GetMapping("/deletetest")
     public String deleteTest(long testId) {
-        testService.deleteTest(testId);
+        testService.delete(testId);
         return "redirect:/tests";
     }
 }

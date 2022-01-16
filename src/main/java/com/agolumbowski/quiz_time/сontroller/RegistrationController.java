@@ -7,7 +7,7 @@ package com.agolumbowski.quiz_time.сontroller;
 
 import com.agolumbowski.quiz_time.entity.Role;
 import com.agolumbowski.quiz_time.entity.User;
-import com.agolumbowski.quiz_time.service.UserService;
+import com.agolumbowski.quiz_time.serviceexp.UserService;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,7 +30,6 @@ public class RegistrationController {
 
     @GetMapping("/registration")
     public String getRegistrationPage() {
-       
         return "registration";
     }
 
@@ -40,12 +39,13 @@ public class RegistrationController {
             model.addAttribute("message", "this user is exist");
             return "registration";
         }
+        
         Set<Role> roles = Set.of(Role.USER);
         user.setRoles(roles);
         String hashPass = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashPass);
         user.setEnabled(true);
-        userService.addUser(user);
+        userService.save(user);
         return "redirect:/login";
     }
 }

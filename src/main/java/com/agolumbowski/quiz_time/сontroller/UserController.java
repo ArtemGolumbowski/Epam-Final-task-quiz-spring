@@ -6,8 +6,8 @@
 package com.agolumbowski.quiz_time.сontroller;
 
 import com.agolumbowski.quiz_time.entity.User;
-import com.agolumbowski.quiz_time.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.agolumbowski.quiz_time.serviceexp.UserService;
+
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/users")
     public String getTestsPage(Model model, @RequestParam(defaultValue = "0") int page) {
@@ -35,20 +38,20 @@ public class UserController {
 
     @PostMapping("/deleteuser")
     public String deleteUser(long userId) {
-        userService.deleteUser(userId);
+        userService.delete(userId);
         return "redirect:/users";
     }
 
     @GetMapping("/edituser")
     public String editUser(long userId, Model model) {
-        User user = userService.findUserById(userId);
+        User user = userService.read(userId);
         model.addAttribute("user", user);
         return "edituser";
     }
 
     @PostMapping("/edituser")
     public String editUser(User user) {
-        userService.saveUser(user);
+        userService.save(user);
         return "redirect:/users";
     }
 }

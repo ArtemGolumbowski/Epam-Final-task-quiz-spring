@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" th:include="pageLayout :: page">
-  
+
     <body>
         <div th:fragment="content">
-        
-        <h1 th:text='#{question.create}'>Create test</h1>
-        <form th:action="@{/createquestion}" method="post">
-            <div><label th:text='#{admin.description}'> Description : </label><input type="text" name="description"/> </div>
-            <input type="hidden" name="testId" th:value="${testId}"/>
 
-            <div><input type="submit" value="ОK"/></div>
-        </form>
+            <h1 th:text='#{question.create}'>Create test</h1>
+            <form th:action="@{/createquestion}" method="post" th:object="${question}">
+                <div><label th:text='#{admin.description}'> Description : </label>
+                    <input type="text" name="description" th:field="*{description}"/> </div>
+
+                <div><input type="submit" value="ОK"/></div>
+            </form>
         </div>
     </body>
 </html>
