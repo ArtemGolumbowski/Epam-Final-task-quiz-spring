@@ -3,25 +3,19 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+        <link rel="stylesheet" th:href="@{/css/external-css.css}" />
     </head>
-
-
-    
+    <body class="container">
     <span th:text='${question.description}'/> 
     <form th:action="@{/quiz}" method="POST">
-
-
         <ol type="1" th:each="answer : ${question.answers}">
-           
             <li><label th:text='${answer.description}'></label><input type="checkbox"  name="userAnswer" th:value = "${answer.description}" /></li>
-                
         </ol><br>
-        
             <input type="submit" th:value="#{button.next}" /> 
-        
-
-        <input type="submit" name="finish" th:value="#{button.finish}"/>
+            <input type="submit" name="finish" th:value="#{button.finish}"/>
     </form>
-</div>
+    </body>
+
 
 </html>

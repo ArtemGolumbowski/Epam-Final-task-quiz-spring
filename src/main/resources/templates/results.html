@@ -7,7 +7,7 @@
                 <thead>
                     <tr>
                         <th th:text='#{user.test}'>Test name</th>
-                        
+
                         <th th:text='#{admin.subject}'>Subject</th>
                         <th th:text='#{admin.level}'></th>
                         <th th:text='#{user.score}'></th>
@@ -23,7 +23,9 @@
                         <td th:text="${userTest.test.subject.name}">апр</td>
                         <td th:text="${userTest.test.level}">апр</td>
                         <td th:text="${userTest.score}">апр</td>
-                        <td th:text="${userTest.userPassDate}">апр</td>
+
+                        <td th:text="${#temporals.format
+                            (userTest.userPassDate, 'dd-MMM-yyyy HH:MM')}">апр</td>
                         <td th:text="${userTest.test.duration}">апр</td>
                         <td th:text="${userTest.userQuizTime}">апр</td>
 
@@ -35,21 +37,22 @@
                 <table border="1">
                     <thead>
                         <tr>
-                            <th><fmt:message key="user.details"/></th>
+                            <th th:text="#{user.details}"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><fmt:message key="registration.name"/>: ${user.name}</td>
+                            <td  th:text="#{registration.login} +': ' + ${user.username}"><fmt:message key="registration.login"/></td>
+                        </tr>
+                        <tr>
+                            <td th:text="#{registration.name} +': ' + ${user.name}"><fmt:message key="registration.surname"/></td>
+                        </tr>
+                        <tr>
+                            <td th:text="#{registration.surname} +': ' + ${user.surname}"><fmt:message key="registration.surname"/></td>
                         </tr>
 
-                        <tr>
-                            <td><fmt:message key="registration.surname"/>: ${user.surname}</td>
-                        </tr>
 
-                        <tr>
-                            <td><fmt:message key="registration.login"/>: ${user.login}</td>
-                        </tr>
+
                     </tbody>
                 </table>
 

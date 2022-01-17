@@ -17,9 +17,11 @@
         </div>
         <h1 th:text='#{login.label.login}'>Login Page</h1>
         <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username"
+
+            <div><label><input type="text" name="username"
                                             th:placeholder='#{registration.login}' id='login'/> </label></div>
-            <div><label> Password: <input type="password" name="password"
+            <div><label><input type="password" name="password"
+
                                           th:placeholder='#{registration.password}' id='password'/> </label></div>
             <div><input type="submit" th:value="#{login.enter}"/></div>
         </form>

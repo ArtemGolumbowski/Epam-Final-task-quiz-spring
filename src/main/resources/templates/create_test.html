@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" th:include="pageLayout :: page">
-   
+
+
     <body>
         <div th:fragment="content" class="container">
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${message}">
-            This login is exist
-        </div>
-        <h1>Create test</h1>
-        <form th:action="@{/createtest}" method="post">
-            <div class="form-group row"><label> Name : <input type="text" name="name"/> </label></div>
-            <div class="form-group row"> Description : <input type="text" name="description"/> </label></div>
-            <div class="form-group row"><label> Duration : <input type="number" name="duration" value="5" min="5" max="120"/> </label></div>
-            <div class="form-group row"><label> Level : <select name="level" size="1">
-                        <option value="easy">Easy</option>
-                        <option value="medium">Medium</option>
-                        <option value="hard">Hard</option>
-                    </select> </label></div>
-            <div><label> Subject :  <select name="subjectId">
+
+            <h1 th:text='#{admin.test.create}'>Create test</h1>
+            <form th:action="@{/createtest}" method="post" th:object="${test}">
+                <div class="form-group row"><label th:text='#{admin.name}'> Name : </label>
+                    <input type="text" name="name" th:field="*{name}"/> </div>
+                <div class="form-group row"><label th:text='#{admin.description}'>  Description : </label>
+                    <input type="text" name="description" th:field="*{description}"/> </div>
+                <div class="form-group row"><label th:text='#{test.time}'> Duration : </label>
+                    <input type="number" name="duration" value="5" min="5" max="120" th:field="*{duration}"/> </div>
+                <div class="form-group row"><label th:text='#{admin.level}'> Level : </label>
+                    <select name="level" size="1" th:field="*{level}">
+                        <option value="easy" th:text='#{admin.test.easy}'>Easy</option>
+                        <option value="medium" th:text='#{admin.test.medium}'>Medium</option>
+                        <option value="hard" th:text='#{admin.test.hard}'>Hard</option>
+                    </select> </div>
+                <div><label th:text='#{admin.subject}'> Subject :  
+                    </label><select name="subjectId" th:field="*{subject.id}">
 
                         <option th:each="subject : ${subjects}" 
                                 th:value="${subject.id}"
                                 th:text="${subject.name}">${subject.name}</option>
                     </select>
-                </label></div>
+                </div>
 
-            <div><input type="submit" value="ОK"/></div>
-            
-        </form>
+                <div><input type="submit" value="ОK"/></div>
+
+            </form>
+
         </div>
     </body>
 </html>

@@ -6,14 +6,20 @@
         <div th:fragment="content">
             <div class="container" th:fragment="content">
                 <div class="card">
+                    <a th:href="@{/tests(currentSubject=${currentSubject}, sort=popularity)}" 
+                       th:text='#{admin.sort.popularity}'></a>
+                    <a th:href="@{/tests(currentSubject=${currentSubject}, sort=level)}"
+                       th:text='#{admin.sort.level}'>dfdg</a>
+                    <a th:href="@{/tests(currentSubject=${currentSubject}, sort=name)}"
+                       th:text='#{admin.sort.name}' ><fmt:message key="admin.sort.name"/></a>
                     <table>
                         <tr>
                             <th th:text='#{admin.test.name}'></th>
-                    <th th:text='#{admin.description}'></th>
-                    <th th:text='#{admin.subject}'></th>
-                    <th th:text='#{admin.level}'></th>
-                    <th th:text='#{admin.description}'></th>
-                    <th th:text='#{admin.actions}'></th>
+                            <th th:text='#{admin.description}'></th>
+                            <th th:text='#{admin.subject}'></th>
+                            <th th:text='#{admin.level}'></th>
+                            <th th:text='#{admin.description}'></th>
+                            <th th:text='#{admin.actions}'></th>
                         </tr>
                         <tr th:each="test : ${tests}">
                             <td><a th:href="@{'/questions/' + ${test.id}}" th:text="${test.name}"></a></td>
@@ -32,26 +38,38 @@
                                         <input type="submit" value="Delete" />
                                     </form>
                                 </div>
+                                    <div sec:authorize="hasAuthority('USER')">
                                 <form th:action="@{/startQuiz}" method="GET">
                                     <input type="hidden"  name="testId" th:value = "${test.id}"/>
                                     <input type="submit" value="Start" />
                                 </form>
+                                    </div>
                             </td>
                         </tr>
                     </table>
                     <ul class="nav nav-pills">
                         <li class="nav-item" th:each="i: ${#numbers.sequence(0, tests.totalPages-1)}">
-                            <a th:href="@{/tests/(page=${i})}"th:text="${i}" class="nav-link"></a>
+                            <a th:href="@{/tests/(currentSubject=${currentSubject}, 
+                               sort=${sort}, page=${i})}" 
+                               th:text="${i}" class="nav-link"></a>
                         </li>
                     </ul>
                 </div>
             </div>
-<div sec:authorize="hasAuthority('ADMIN')">
-            <a th:href="@{/createtest}">Create test</a>
-        </div>
+            <div sec:authorize="hasAuthority('ADMIN')">
+                <a th:href="@{/createtest}" th:text='#{admin.test.create}'>Create test</a>
+            </div>
             <div sec:authorize="hasAuthority('USER')">
-                <a th:href="@{/results}" th:text='#{user.results}'>Results</a>
+                <ul class="navbar">
+                    <li><a th:href="@{/tests}" th:text='#{user.tests}'><fmt:message key="user.tests"/></a></li>
+                    <div th:each ="subject : ${subjects}">
+                        <li> <a th:href="@{/tests(currentSubject=${subject.name})}" 
+                                th:text='${subject.name}'>subject</a></li>
+                    </div>
+                    <li><a th:href="@{/results}" th:text='#{user.results}'></a></li>
+                </ul>
             </div>
         </div>
+
     </body>
 </html>
