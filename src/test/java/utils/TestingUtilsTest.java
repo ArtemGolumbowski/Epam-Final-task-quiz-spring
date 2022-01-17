@@ -5,7 +5,7 @@
  */
 package utils;
 
-import com.agolumbowski.quiz_time.entity.Answer;
+import com.agolumbowski.quiztime.entity.Answer;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;

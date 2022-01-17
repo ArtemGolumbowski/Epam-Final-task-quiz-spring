@@ -3,6 +3,7 @@
   
     <body>
         <div th:fragment="content">
+
         <h1 th:text='#{admin.edit}'>Edit test</h1>
         <form th:action="@{/editquestion}" method="post">
             <input type="hidden"  name="id" th:value = "${question.id}"/>
@@ -16,6 +17,7 @@
             <input type="submit" value="Close" />
         </form>
         
+
         </div>
     </body>
 </html>

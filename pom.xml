@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.agolumbowski</groupId>
-	<artifactId>quiz_time</artifactId>
+	<artifactId>quiztime</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>quiz_time</name>
+	<name>quiztime</name>
 	<description>Epam project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
@@ -123,9 +123,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-                       
-        
-  
+                               
 		</plugins>
 	</build>
 

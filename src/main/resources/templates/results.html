@@ -7,7 +7,7 @@
                 <thead>
                     <tr>
                         <th th:text='#{user.test}'>Test name</th>
-                        
+
                         <th th:text='#{admin.subject}'>Subject</th>
                         <th th:text='#{admin.level}'></th>
                         <th th:text='#{user.score}'></th>
@@ -23,6 +23,7 @@
                         <td th:text="${userTest.test.subject.name}">апр</td>
                         <td th:text="${userTest.test.level}">апр</td>
                         <td th:text="${userTest.score}">апр</td>
+
                         <td th:text="${#temporals.format
                             (userTest.userPassDate, 'dd-MMM-yyyy HH:MM')}">апр</td>
                         <td th:text="${userTest.test.duration}">апр</td>
@@ -43,14 +44,15 @@
                         <tr>
                             <td  th:text="#{registration.login} +': ' + ${user.username}"><fmt:message key="registration.login"/></td>
                         </tr>
-              <tr>
+                        <tr>
                             <td th:text="#{registration.name} +': ' + ${user.name}"><fmt:message key="registration.surname"/></td>
                         </tr>
                         <tr>
                             <td th:text="#{registration.surname} +': ' + ${user.surname}"><fmt:message key="registration.surname"/></td>
                         </tr>
 
-                        
+
+
                     </tbody>
                 </table>
 
