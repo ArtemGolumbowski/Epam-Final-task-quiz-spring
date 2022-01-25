@@ -73,9 +73,10 @@ public class QuestionServiceImplTest {
         question.setDescription("description");
         QuestionServiceImpl instance = new QuestionServiceImpl(questionRepository);
         Question expResult = question;
+        Mockito.when(questionRepository.save(question)).thenReturn(question);
         Question result = instance.save(question);
         assertEquals(expResult, result);
-       
+
     }
 
     /**
@@ -84,8 +85,8 @@ public class QuestionServiceImplTest {
     @Test
     public void testRead() {
         System.out.println("read");
-        long questionId = 0L;
-        QuestionServiceImpl instance = null;
+        long questionId = 4L;
+        QuestionServiceImpl instance = new QuestionServiceImpl(questionRepository);
         Question expResult = null;
         Question result = instance.read(questionId);
         assertEquals(expResult, result);
