@@ -7,7 +7,8 @@ package com.agolumbowski.quiztime.сontroller;
 
 import com.agolumbowski.quiztime.entity.Role;
 import com.agolumbowski.quiztime.entity.User;
-import com.agolumbowski.quiztime.serviceexp.UserService;
+import com.agolumbowski.quiztime.service.UserService;
+
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

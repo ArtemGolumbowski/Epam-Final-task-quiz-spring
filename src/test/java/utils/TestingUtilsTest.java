@@ -60,7 +60,13 @@ public class TestingUtilsTest {
         int expResult = 1;
         int result = TestingUtils.checkAnswer(userAnswers, answers);
         Assert.assertEquals(expResult, result);
-        
+        answer2.setCorrect(false);
+        expResult = 0;
+        result = TestingUtils.checkAnswer(userAnswers, answers);
+        Assert.assertEquals(expResult, result);
+        answer2.setCorrect(true);
+        answer3.setCorrect(true);
+        Assert.assertEquals(expResult, result);
     }
     
 }

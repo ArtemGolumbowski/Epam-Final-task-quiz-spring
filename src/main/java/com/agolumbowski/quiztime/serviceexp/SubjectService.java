@@ -13,11 +13,11 @@ import org.springframework.data.domain.Page;
  *
  * @author agolu
  */
-public interface SubjectService extends Service {
+public interface SubjectService extends Service<Subject> {
 
     public List<Subject> getAllSubjects();
 
     public Page getAllSubjectsPage(int page);
 
-    public Subject save(Subject subject);
+//    public Subject save(Subject subject);
 }
