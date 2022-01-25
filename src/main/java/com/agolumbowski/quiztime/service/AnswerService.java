@@ -18,19 +18,26 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AnswerService {
-    @Autowired
-    private QuestionRepository questionRepository;
-    @Autowired
-    private AnswerRepository answerRepository;
-     public void createAnswer(Answer answer, long questionId){
-       Question question = questionRepository.getById(questionId);
-       answer.setQuestion(question);
-       answerRepository.save(answer);
+
+    public AnswerService(QuestionRepository questionRepository, AnswerRepository answerRepository) {
+        this.questionRepository = questionRepository;
+        this.answerRepository = answerRepository;
     }
-    public void editAnswer(Answer answer){     
-       answerRepository.save(answer);
+
+    private final QuestionRepository questionRepository;
+    private final AnswerRepository answerRepository;
+
+    public void createAnswer(Answer answer, long questionId) {
+        Question question = questionRepository.getById(questionId);
+        answer.setQuestion(question);
+        answerRepository.save(answer);
     }
-    public Answer getAnswerById(long answerId){
+
+    public void editAnswer(Answer answer) {
+        answerRepository.save(answer);
+    }
+
+    public Answer getAnswerById(long answerId) {
         return answerRepository.getById(answerId);
     }
 }

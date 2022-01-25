@@ -12,7 +12,6 @@ import org.springframework.data.domain.Page;
  *
  * @author agolu
  */
-public interface TestService extends Service{
+public interface TestService extends Service<Test>{
     public Page getTestsBySubject(int page, String sort, String subject);
-    public Test save(Test test);
 }

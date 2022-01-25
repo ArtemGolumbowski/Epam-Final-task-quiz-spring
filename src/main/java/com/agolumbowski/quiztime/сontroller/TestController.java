@@ -43,6 +43,7 @@ public class TestController {
         model.addAttribute("tests", testPage);
         model.addAttribute("currentSubject", currentSubject);
         model.addAttribute("sort", sort);
+        System.out.println(testPage.getContent());
         return "tests";
     }
 

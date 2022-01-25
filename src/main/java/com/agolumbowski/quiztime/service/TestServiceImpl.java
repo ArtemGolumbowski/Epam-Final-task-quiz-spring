@@ -1,10 +1,8 @@
 package com.agolumbowski.quiztime.service;
 
-import com.agolumbowski.quiztime.entity.Subject;
 import com.agolumbowski.quiztime.entity.Test;
 import com.agolumbowski.quiztime.repos.TestRepository;
 import com.agolumbowski.quiztime.serviceexp.TestService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TestServiceImpl implements TestService {
 
-    private final TestRepository testRepository;
+    final TestRepository testRepository;
 
     public TestServiceImpl(TestRepository testRepository) {
         this.testRepository = testRepository;

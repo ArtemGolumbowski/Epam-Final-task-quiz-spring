@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package com.agolumbowski.quiztime.config;
-import com.agolumbowski.quiztime.serviceexp.UserService;
+
+import com.agolumbowski.quiztime.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

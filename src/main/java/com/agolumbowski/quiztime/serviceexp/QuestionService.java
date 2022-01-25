@@ -12,8 +12,7 @@ import java.util.List;
  *
  * @author agolu
  */
-public interface QuestionService extends Service {
+public interface QuestionService extends Service<Question> {
     public List<Question> getAll(long testId);
-    public Question save(Question question);
     
 }

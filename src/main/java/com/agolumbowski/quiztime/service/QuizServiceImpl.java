@@ -1,8 +1,6 @@
 package com.agolumbowski.quiztime.service;
 
-import com.agolumbowski.quiztime.entity.UserTestBean;
 import com.agolumbowski.quiztime.repos.UTBRepository;
-import com.agolumbowski.quiztime.serviceexp.QuizService;
 import org.springframework.stereotype.Service;
 
 /**

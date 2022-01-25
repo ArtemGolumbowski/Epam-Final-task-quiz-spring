@@ -6,12 +6,9 @@
 package com.agolumbowski.quiztime.service;
 
 import com.agolumbowski.quiztime.entity.Question;
-import com.agolumbowski.quiztime.entity.Test;
 import com.agolumbowski.quiztime.repos.QuestionRepository;
-import com.agolumbowski.quiztime.repos.TestRepository;
 import com.agolumbowski.quiztime.serviceexp.QuestionService;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**

@@ -6,7 +6,8 @@
 package com.agolumbowski.quiztime.сontroller;
 
 import com.agolumbowski.quiztime.entity.User;
-import com.agolumbowski.quiztime.serviceexp.UserService;
+import com.agolumbowski.quiztime.service.UserService;
+
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -10,8 +10,9 @@ import com.agolumbowski.quiztime.entity.Question;
 import com.agolumbowski.quiztime.entity.Test;
 import com.agolumbowski.quiztime.entity.User;
 import com.agolumbowski.quiztime.entity.UserTestBean;
+import com.agolumbowski.quiztime.service.UserService;
 import com.agolumbowski.quiztime.serviceexp.TestService;
-import com.agolumbowski.quiztime.serviceexp.UserService;
+
 
 import java.time.Duration;
 import java.time.LocalDateTime;

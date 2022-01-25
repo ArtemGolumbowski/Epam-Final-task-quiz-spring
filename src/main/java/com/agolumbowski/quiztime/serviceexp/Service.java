@@ -6,8 +6,8 @@
 package com.agolumbowski.quiztime.serviceexp;
 
 
-public interface Service {
-//    public <T> T save(T t);
-    public <T> T read(long id);
+public interface Service<T> {
+    public T save(T t);
+    public T read(long id);
     public void delete(long id);
 }
